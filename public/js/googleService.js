@@ -1,7 +1,7 @@
 /*
  * A service for using gapi and goole plus sign in
  *
- * define variable clientId with google-clientid
+ * define variable clientId with google-clientid in key.js
  */
 
 ukuleleApp.factory('Google', function($window) {

@@ -1,6 +1,6 @@
 /*
- * Insert Ukulele-chords.com api-key in
- * var apiKey
+ * Insert Ukulele-chords.com api-key in key.js
+ *
  *
  */
 
