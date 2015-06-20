@@ -1,0 +1,29 @@
+<ng-include src="'/partials/nav.html'" ng-controller="NavCtrl"></ng-include>
+
+<a site-back class="btn btn-default btn-lg backbtn" style="position:absolute;">
+  <span class="glyphicon glyphicon-arrow-left"></span> Back
+</a>
+
+<div ng-repeat="song in songs track by $index">
+  <div class="songpaper">
+    <h2 class="text-center">{{song.title}}</h2>
+    <p class="text-center">
+      By {{song.artist}}
+    </p>
+    <br> <br>
+    <div ng-repeat="part in song.song track by $index">
+      <p class="flow viewbar-comment" ng-if="part.comment">
+        {{part.comment}}
+      </p>
+      <div ng-repeat="bar in part.bars track by $index">
+        <span class="thumb">
+          <img ng-src="{{bar.chord[bar.chordIndex].chord_diag}}">
+        </span>
+      </div>
+    </div>
+    <div class="view-desc text-center flow"
+      ng-bind-html="desc(song.description)">
+    </div>
+  </div>
+  <br>
+</div>

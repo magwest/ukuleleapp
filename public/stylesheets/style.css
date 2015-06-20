@@ -1,0 +1,269 @@
+html {height:100%;}
+body {
+  height:100%;
+  padding-top: 37px;
+ 	/*padding-right: 20px;
+  padding-left: 20px; */
+ 	min-width:1162px;
+ 	width:auto !important;
+ 	background:url('../images/FreeVector-Jungle-Background.jpg') no-repeat center center fixed;
+	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+
+}
+
+a {
+	color: #00B7FF;
+}
+.flow{
+	font-family: 'Indie Flower';
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.3999996185303px;
+}
+.chord-box{
+	position:absolute;
+	left:20px;
+	width:256px;
+	min-width: 200px;
+}
+.song-box{
+	position:absolute;
+	top:70px;
+	margin-left:290px;
+	width:844px;
+	padding-bottom: 40px;
+}
+.some-box {
+  position:relative;
+  width:60%;
+  margin-top:34px;
+  margin-left:20%;
+}
+.btn-chord{
+	font-weight: bold;
+	color: #777;
+}
+.backbtn {
+  margin: 30px 0 0 10px;
+}
+.badge {
+	background-color:white;
+	color: #666;
+	border:1px solid #bbb;
+	padding: 8px;
+}
+.badge:hover {
+	cursor: -webkit-grab; cursor: -moz-grab;
+}
+.badge:active{
+	cursor: -webkit-grabbing;rsor: -moz-grabbing;
+}
+.bars {
+	background-image: url('../images/staffbars.png');
+	width:794px;
+	height:250px;
+	padding-left: 80px;
+}
+.bar-box {
+	border:1px solid #ddd;
+	width: 160px;
+	height: 172px;
+	float:left;
+	margin-left:10px;
+	margin-top: 15px;
+	background-color: rgba(256,254,254,0.93);
+}
+.under {
+	clear:left;
+	padding-top:20px;
+}
+.bar-comment{
+	margin-top: 10px;
+	margin-left:10px;
+	border: 0px;
+	background-color: rgba(250,250,250,1);
+}
+.bar-comment:placeholder{
+	font-weight: normal;
+}
+.songpaper{
+  margin: 35px auto 0 auto;
+	width:800px;
+  border:#ddd;
+  background-color: white;
+  padding: 50px;
+}
+[ng-drag].dragging{
+        position: relative !important;
+}
+.remove{
+	color: #BD5C5C;
+}
+.remove:hover{
+	color:#FF7575;
+	cursor:pointer;
+}
+.linkc{
+	color: #777;
+}
+.wh {
+  background-color:white;
+}
+h4 {
+	margin:0px;
+	padding:0px;
+}
+h4.linkc:hover{
+	color: #ddd;
+	cursor:pointer;
+}
+.message {
+	position:fixed;
+
+	width:500px;
+	z-index:10;
+}
+.diaBack{
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background-color:rgba(0,0,0,0.3);
+	z-index:2;
+}
+.dialog {
+	position:fixed;
+	left:50%;
+	top:20%;
+	margin-left:-300px;
+	z-index:3;
+}
+.shortI {
+  width:300px;
+}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #e6e6e6;
+  cursor: pointer;
+}
+.viewbar-comment {
+  clear:left;
+  padding-top:40px;
+  margin-left:20px;
+}
+.thumb {
+  float:left;
+  overflow:hidden;
+  width:170px;
+  height:220px;
+}
+.thumb img {
+  margin: -13px -20px -15px -10px;
+}
+.view-desc {
+  clear:left;
+  padding-top:40px;
+}
+.loadingsm {
+  margin-top:-25px;
+
+}
+.inline-block {
+  display:inline-block;
+}
+.firstpage {
+  position:relative;
+  display:block;
+  height:100%;
+  width:100%;
+}
+.no1 {
+  background-color: rgba(0,0,0,0.8);
+}
+.no2 {
+  background-color: rgba(0,100,0,0.8);
+}
+.no3 {
+  background-color: rgba(150, 150,150,0.8);
+}
+.downbutton {
+  position: relative;
+  top:90%;
+  margin: 0 auto 0 auto;
+  padding:0 0 0 0;
+  width:38px;
+  height: 30px;
+  color: #ddd;
+}
+.downbutton:hover {
+  cursor: pointer;
+  color: #333;
+}
+.down-symbol {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+.firstpage-last {
+  position:relative;
+  display:block;
+  height:85%;
+  width:100%;
+}
+.foot {
+  position:relative;
+  height:100px;
+  width:100%;
+  background-color:black;
+}
+.wht {
+  color:white;
+}
+.middle-left{
+  position:absolute;
+  top:100px;
+  left:60px;
+  width:520px;
+
+}
+.middle-right{
+  position:absolute;
+  top:100px;
+  left:580px;
+  width:520px;
+
+}
+.plusminus {
+  margin-top:12px;
+}
+img.im-op{
+  opacity:0.4;
+}
+img.im-br{
+  border: 1px solid #888;
+}
+::-webkit-input-placeholder {
+   font-size: 12px;
+   color:#bbb;
+}
+.active:hover{
+  cursor:default;
+}
+:-moz-placeholder { /* Firefox 18- */
+   font-size: 12px;
+   color:#bbb;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   font-size: 12px;
+   color:#bbb;
+}
+
+:-ms-input-placeholder {
+   font-size: 12px;
+   color:#bbb;
+}

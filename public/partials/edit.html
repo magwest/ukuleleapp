@@ -1,0 +1,208 @@
+<ng-include src="'/partials/nav.html'" ng-controller="NavCtrl"></ng-include>
+
+		<div class="chord-box" ng-style="{top: scrollPosition + 70 + 'px'}">
+			<!-- Root chords -->
+			<div class="well well-lg">
+				<h3>Song editor</h3>
+				<p>Choose a root chord<p>
+				<button class="btn btn-default btn-sm btn-chord"
+						ng-repeat="chord in chords" ng-click="showTypes(chord)">
+					{{chord}}
+				</button>
+
+			<!-- Chord types -->
+				<div ng-show="chordChosen">
+					Drag a chord to a song bar
+					<span class="glyphicon glyphicon-share-alt"></span>
+					<br>
+					<span ng-repeat="type in types">
+						<div class="badge" ng-drag="true"
+							ng-drag-success="onDragComplete($data,$event)"
+							ng-drag-data="{'r':rootChord,'typ':type}">
+							{{rootChord}}{{type}}
+						</div>
+					</span>
+					<br><br>
+					<button class="btn btn-default btn-sm" ng-click="chordChosen=false">
+						<span class="glyphicon glyphicon-circle-arrow-up"></span> Hide
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- The song  -->
+		<div class="well well-lg song-box">
+			<button class="btn btn-warning btn-xs pull-right" ng-click="clearDialog = true">
+				Create new project / Clear all
+			</button>
+			<input type="text" class="form-control shortI inline-block"
+					placeholder="Song title" ng-model="project.title" ng-change="changed()">
+			<img ng-src="/images/loading_sm1.gif" class="inline-block" ng-if="loading">
+			<br><br>
+
+			<!-- loop through all parts in the song-->
+			<div class="bars" ng-repeat="part in project.song track by $index">
+				<input type="text"
+					ng-model="part.comment"
+					placeholder="Add a comment"
+					class="bar-comment"
+					ng-change="changed()">
+				<br>
+
+				<!-- and loop through the four bars in the part and set out dropboxes-->
+				<div class="bar-box text-center"
+					ng-repeat="bar in part.bars track by $index"
+					ng-drop="true"
+					ng-drop-success="onDropComplete($data,$event,part,$index)">
+
+					<!-- the chord showing in the box -->
+					<img ng-if="bar.loading" ng-src="/images/loading.gif">
+					<div ng-if="bar.loading===false">
+						<!--<button class="btn btn-danger btn-xs pull-right" ng-click="remove(part,$index)">-->
+							<span class="glyphicon glyphicon-remove pull-right remove"
+									ng-click="remove(part,$index)">
+							</span>
+
+						<img ng-src="{{bar.chord[bar.chordIndex].chord_diag_mini}}"><br>
+						<div ng-if="bar.chord.length>1">
+
+							<small class="linkc">Change voicing</small>
+							<br>
+							<h4 class="glyphicon glyphicon-circle-arrow-left linkc"
+								ng-click="bar.chordIndex = changeMinus(bar.chordIndex,bar.chord.length); changed()"></h4>
+
+							<h4 class="glyphicon glyphicon-circle-arrow-right linkc"
+								ng-click="bar.chordIndex = changePlus(bar.chordIndex,bar.chord.length); changed()"></h4>
+
+						</div>
+						<small class="linkc" ng-if="bar.chord.length===1">Only one voicing available</small>
+					</div>
+				</div>
+				<button class="btn btn-default btn-xs pull-right plusminus" ng-click="addBars($index)">
+					<strong>+</strong> Add more bars
+				</button>
+				<button class="btn btn-default btn-xs pull-right plusminus" ng-click="removeBars($index)" ng-if="project.song.length>1">
+					<strong>-</strong> Remove bars&nbsp; &nbsp;
+				</button>
+			</div>
+			<br>
+			<br><br>
+			<textarea class="form-control" rows="8"
+					placeholder="Write notes about the song here..."
+					ng-model="project.description"
+					ng-change="changed()">
+			</textarea>
+			<br>
+			<div class="under">
+				<!-- if not saved before i.e doesn't have any _id -->
+				<button class="btn btn-success btn-lg pull-right" ng-if="!project._id" ng-click="$parent.saveDialog=true">
+					Save song
+				</button>
+				<!-- save update, save as new -->
+				<button class="btn btn-success pull-right" ng-if="project._id" ng-click="saveUpdates()">
+					Save
+				</button>
+				<button class="btn btn-default pull-right btn-chord" ng-if="project._id"
+					ng-click="$parent.saveDialog=true"
+					style="margin-right:15px;">
+					<strong>Save As New</strong>
+				</button>
+			</div>
+		</div>
+
+	</div>
+	<!-- div for new project dialog message -->
+		<div class="diaBack" ng-show="clearDialog">
+		  <div class="modal-dialog dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" ng-click="clearDialog=false">
+		        	<span aria-hidden="true">&times;</span>
+		        </button>
+		        <h4 class="modal-title">Create new project</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p>Are you sure you want to continue creating a new project?</p>
+		        <p>All your chords and comments will be reset since the last saving...</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" ng-click="clearDialog=false">Cancel</button>
+		        <button type="button" class="btn btn-danger" ng-click="createNew()">Clear all</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+	<!-- div for save project dialog message -->
+		<div class="diaBack" ng-show="saveDialog">
+		  <div class="modal-dialog dialog">
+		    <div class="modal-content" ng-hide="saved">
+		      <div class="modal-header">
+		        <button type="button" class="close" ng-click="saveDialog=false">
+		        	<span aria-hidden="true">&times;</span>
+		        </button>
+		        <h4 class="modal-title">Save song project</h4>
+		      </div>
+		      <div class="modal-body">
+			    <form name="saveForm">
+			      	<div class="form-group">
+				        <label for="titleInput">
+				        	Title:
+				        	<span class="remove" ng-show="saveForm.titleInput.$error.required">*</span>
+				        </label>
+				        <input type="text" class="form-control"
+				        		name="titleInput"
+				        		placeholder="Name of the song"
+				        		ng-model="project.title" required>
+			      	</div>
+			      	<div class="form-group">
+				        <label for="artistInput">
+				           	Artist:
+				           	<span class="remove" ng-show="saveForm.artistInput.$error.required">*</span>
+				        </label>
+				        <input type="text" class="form-control"
+				        		name="artistInput"
+				        		placeholder="eg. The Beatles or {{user.name}}"
+				        		ng-model="project.artist" required>
+				    </div>
+					</form>
+			  	</div>
+		      <div class="modal-footer">
+		        <button class="btn btn-default" ng-click="saveDialog=false">Cancel</button>
+		        <div class="btn btn-success disabled"
+		        	ng-show="saveForm.artistInput.$error.required||saveForm.titleInput.$error.required">
+		        	Save to library
+		    		</div>
+		        <button class="btn btn-success" ng-click="save()" ng-if="!project._id"
+		        	ng-show="saveForm.artistInput.$valid&&saveForm.titleInput.$valid">
+		        	Save to library
+		    		</button>
+						<button class="btn btn-success" ng-click="saveAs()" ng-if="project._id"
+		        	ng-show="saveForm.artistInput.$valid&&saveForm.titleInput.$valid">
+		        	Save as a new song
+		    		</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+
+				<div class="modal-content" ng-show="saved">
+					<div class="modal-body">
+						<p>
+							Your song is saved to your library.
+						</p>
+					</div>
+				</div>
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+	<!-- div for update save project dialog message -->
+		<div ng-show="updateDialog">
+			<div class="modal-dialog dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<p>
+							Your updates has been saved
+						</p>
+					</div>
+				</div>
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->

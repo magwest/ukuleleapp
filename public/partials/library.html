@@ -1,0 +1,145 @@
+<ng-include src="'/partials/nav.html'" ng-controller="NavCtrl"></ng-include>
+
+<div class="well well-lg some-box">
+  <h1>My song library</h1>
+  <div ng-if="isSongs()">
+    <br>
+    <small ng-show="playlistMaker">Select songs for your playlist</small>
+    <table class="table">
+      <tr ng-repeat="song in songs">
+        <td ng-show="playlistMaker">
+          <input type="checkbox"
+            ng-model="playlist[$index]">
+        </td>
+        <td>
+          <strong>{{song.title}}</strong> by <strong>{{song.artist}}</strong>
+        </td>
+
+        <td ng-hide="playlistMaker">
+          <a class="btn btn-default btn-xs" ng-href="#/song/{{song._id}}">
+            <span class="glyphicon glyphicon-music"</span> <strong>View</strong>
+          </a>
+        </td>
+        <td ng-hide="playlistMaker">
+          <button class="btn btn-success btn-xs" ng-click="setShare($index)" ng-hide="song.shared">
+            <span class="glyphicon glyphicon-share"></span> Share &nbsp
+          </button>
+          <div class="btn btn-success btn-xs active" ng-show="song.shared">
+            <span class="glyphicon glyphicon-share"></span> Shared
+          </div>
+        </td>
+        <td ng-hide="playlistMaker">
+          <a ng-href="#/edit/{{song._id}}" class="btn btn-warning btn-xs">
+            <span class="glyphicon glyphicon-edit"</span> Edit
+          </a>
+        </td>
+        <td ng-hide="playlistMaker">
+          <button class="btn btn-danger btn-xs" ng-click="setDelete($index)">
+            <span class="glyphicon glyphicon-trash"></span> Delete
+          </button>
+        </td>
+      </tr>
+    </table>
+    <div class="text-center">
+      <button class="btn btn-default" ng-click="playlistMaker=true" ng-hide="playlistMaker">
+        + Create playlist
+      </button>
+
+
+      <button class="btn btn-default" ng-click="playlistMaker=false" ng-show="playlistMaker">
+        Cancel
+      </button>
+      <button class="btn btn-success" ng-click="createPlaylist()" ng-show="playlistMaker&&playlist.length!=0">
+        <span class="glyphicon glyphicon-eye-open"></span>
+        View playlist
+      </button>
+      <button class="btn btn-success disabled" ng-show="playlistMaker&&playlist.length==0">
+        <span class="glyphicon glyphicon-eye-open"></span>
+        View playlist
+      </button>
+
+      <br>
+
+    </div>
+    <br>
+
+  </div>
+  <div ng-hide="isSongs()">
+    <br>
+    <h4>
+      There are no songs in your library yet :( <br>
+      Let's go make one in the <a href="#/edit">Song Editor</a>
+    </h4>
+    <br>
+  </div>
+
+</div>
+
+<!--Share dialog box -->
+  <div class="diaBack" ng-show="shareDialog">
+    <div class="modal-dialog dialog">
+      <div class="modal-content" ng-hide="shared">
+        <div class="modal-header">
+          <button type="button" class="close" ng-click="cancel()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Share this project</h4>
+        </div>
+        <div class="modal-body">
+          <p>When you're sharing your project other users can find it and access it
+            from the song browser, and they may also save a copy to their own library
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+          <button type="button" class="btn btn-success" ng-click="share()">
+            <span class="glyphicon glyphicon-share"></span>Share
+          </button>
+        </div>
+      </div><!-- /.modal-content -->
+      <div class="modal-content" ng-show="shared">
+        <div class="modal-body">
+          <p>
+            Your song is shared
+          </p>
+        </div>
+      </div>
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+<!--Delete dialog box -->
+
+  <div class="diaBack" ng-show="deleteDialog">
+    <div class="modal-dialog dialog">
+      <div class="modal-content" ng-hide="removed">
+        <div class="modal-header">
+          <button type="button" class="close" ng-click="cancel()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Delete song</h4>
+        </div>
+        <div class="modal-body">
+          <p>
+            This action will remove the song from your library and also
+            from the song browser if it is shared!
+          </p>
+          <p>
+            Are you sure you want to continue?
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+          <button type="button" class="btn btn-danger" ng-click="removeSong()">
+            <span class="glyphicon glyphicon-trash"></span>
+            Delete it!
+          </button>
+        </div>
+      </div><!-- /.modal-content -->
+      <div class="modal-content">
+        <div class="modal-body" ng-show="removed">
+          <p>
+            Your song is now completely removed
+          </p>
+        </div>
+      </div>
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->

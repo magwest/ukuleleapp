@@ -1,0 +1,97 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <span class="navbar-text flow">
+        The Bad Ass Ukulele Song Machine
+      </span>
+    </div>
+		<form class="navbar-form navbar-right">
+			<button class="btn btn-danger btn-sm" ng-click="signIn()">Sign in with Google</button>
+		</form>
+</nav>
+
+	<div id="no1" class="firstpage no1">
+		<div class="middle-left wht">
+			<h1>Welcome to <br>
+				<span class="flow">The Bad Ass Ukulele Song Machine</span>
+			</h1>
+			<br>
+			<h4>Simply an awesome tool when you want to pick up the Ukulele</h4>
+			<img src="./images/honu-ukulele.png" class="im-op">
+		</div>
+		<div class="middle-right text-center">
+			<img src="./images/ps1.jpg" class="img-circle im-op im-br">
+		</div>
+		<div class="downbutton" ng-click="goTo(1)">
+			<h1 class="down-symbol">
+				<span class="glyphicon glyphicon-menu-down"></span>
+			</h1>
+		</div>
+	</div>
+
+	<div id="no2" class="firstpage no2" >
+		<img src="./images/ps2.jpg" class="img-rounded im-op" style="position:absolute;">
+
+		<div class="middle-right wht">
+			<h4>
+
+  			Create songs fast by simply drag chords and drop them wherever you want them
+  			to be in a song..<br>
+  			Choose between different "voicings" of the chord eg. different ways of how to play the chord
+  			<br>Add comments or notes about the songs
+  			<br><br>
+  			In just a fiew minutes you'll have a visual representation of how you will play the song on the Ukulele.
+  			<br><br>
+  			Also an awesome tool for song writing!
+      </h4>
+		</div>
+		<div class="downbutton" ng-click="goTo(2)">
+			<h1 class="down-symbol">
+				<span class="glyphicon glyphicon-menu-down"></span>
+			</h1>
+		</div>
+	</div>
+
+	<div id="no3" class="firstpage no3">
+		<h2 style="position:absolute;top:10px; left:10px;" class="flow">
+      "The Open Source of Ukulele Songs"
+    </h2>
+		<img src="./images/ps3.png" class="img-rounded im-op"
+      style="position:absolute;left:350px; top:100px">
+		<img src="./images/ps4.png" class="img-rounded im-br im-op"
+			style="position:absolute;left:730px;top:50px;">
+		<div class="downbutton" ng-click="goTo(3)">
+			<h1 class="down-symbol">
+				<span class="glyphicon glyphicon-menu-down"></span>
+			</h1>
+		</div>
+    <div style="position:absolute;top:15%;left:50px;width:300px;">
+  		<h4>
+  			Build a song library with all your Ukulele songs you make.
+  			Create "playlists" and view several songs from your library in one printable view
+  			<br><br>
+  			Share your songs to other users and browse other users songs aswell <br>
+  			When you find something cool, save it to your own library!
+        And if you want - edit it in the way you want it and share it again..<br><br>
+
+  		</h4>
+    </div>
+	</div>
+
+	<div id="no4" class="firstpage-last text-center">
+		<div style="position:absolute;top:100px;left:23%">
+			<h1 class="flow">Sign in with your Google account to start making awesome songs!</h1>
+			<br>
+			<h4 class="linkc flow" ng-click="signIn()">Sign in</h4>
+		</div>
+	</div>
+	<div class="foot text-center">
+		<br>
+		<p>Created by Magnus Westlund</p>
+	</div>

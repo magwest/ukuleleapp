@@ -1,0 +1,79 @@
+<ng-include src="'/partials/nav.html'" ng-controller="NavCtrl"></ng-include>
+
+<div class="well well-lg some-box">
+  <h1>Song Browser</h1>
+  <form name="searchForm" class="inline-block">
+    <div class="input-group shortI">
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-search"></span>
+      </span>
+      <input type="text" name="searchInput" class="form-control" placeholder="Search for a song..."
+        ng-model="word">
+    </div>
+  </form>
+  <img ng-src="/images/loading_sm1.gif" class="loadingsm inline-block" ng-if="loading">
+
+  <br><br>
+  <table class="table table-hover wh">
+    <thead>
+      <tr>
+        <th>
+          Song title
+        </th>
+        <th>
+          Artist
+        </th>
+        <th>
+          Created by
+        </th>
+        <th>
+          Date
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="song in songs">
+        <td ng-click="goTo(song._id)">
+          {{song.title}}
+        </td>
+        <td ng-click="goTo(song._id)">
+          {{song.artist}}
+        </td>
+        <td ng-click="goTo(song._id)">
+          {{song.user_lib_name}}
+        </td>
+        <td ng-click="goTo(song._id)">
+          {{song.date | date:'yyyy-MM-dd HH:mm:ss Z'}}
+        </td>
+
+        <td>
+          <button ng-hide="alreadySaved(song._id)" class="btn btn-default btn-xs" ng-click="copyToLib($index)">
+            <span class="glyphicon glyphicon-save"></span>
+            Save to library
+          </button>
+          <button ng-show="alreadySaved(song._id)" class="btn btn-default btn-xs active">
+            <span class="glyphicon glyphicon-saved"></span>
+            In your library
+          </button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+
+
+</div>
+
+<!--Save dialog box -->
+
+  <div ng-show="dialog">
+    <div class="modal-dialog dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>
+            Saved to your Song Library
+          </p>
+        </div>
+      </div>
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
