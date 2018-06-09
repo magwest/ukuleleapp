@@ -1,4 +1,6 @@
-# iprog-project
+# UkuleleApp
+
+A web app for making chord tabs for Ukulele. Technologies used are Angular, Node.js (Express) and MongoDB
 
 Requiring node.js, bower and mongo db installed on your computer
 
