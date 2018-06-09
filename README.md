@@ -1,5 +1,4 @@
 # iprog-project
-Project in the Interaction Programming and the Dynamic Web course at KTH
 
 Requiring node.js, bower and mongo db installed on your computer
 
